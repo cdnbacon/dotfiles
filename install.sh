@@ -264,6 +264,10 @@ require_nvm stable
 # always pin versions (no surprises, consistent dev/build machines)
 npm config set save-exact true
 
+# sensible defaults for writing up Node packages
+npm config set init-author-name "$fullname"
+npm config set init-author-email "$email"
+
 #####################################
 # Now we can switch to node.js mode
 # for better maintainability and
@@ -557,6 +561,7 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 running "Restart automatically if the computer freezes"
 sudo systemsetup -setrestartfreeze on;ok
 
+# Need to test this when on battery
 running "Never go into computer sleep mode"
 sudo systemsetup -setcomputersleep Off > /dev/null;ok
 
@@ -616,6 +621,7 @@ defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true;ok
 
+# May regret disabling this
 running "Disable auto-correct"
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false;ok
 
@@ -623,9 +629,9 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false;o
 bot "Configuring the Screen"
 ###############################################################################
 
-running "Require password immediately after sleep or screen saver begins"
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
+# running "Require password immediately after sleep or screen saver begins"
+# defaults write com.apple.screensaver askForPassword -int 1
+# defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
 
 running "Save screenshots to the desktop"
 defaults write com.apple.screencapture location -string "${HOME}/Desktop";ok
@@ -796,15 +802,15 @@ bot "Configuring Hot Corners"
 # 11: Launchpad
 # 12: Notification Center
 
-running "Top left screen corner → Mission Control"
-defaults write com.apple.dock wvous-tl-corner -int 2
-defaults write com.apple.dock wvous-tl-modifier -int 0;ok
-running "Top right screen corner → Desktop"
-defaults write com.apple.dock wvous-tr-corner -int 4
-defaults write com.apple.dock wvous-tr-modifier -int 0;ok
-running "Bottom right screen corner → Start screen saver"
-defaults write com.apple.dock wvous-br-corner -int 5
-defaults write com.apple.dock wvous-br-modifier -int 0;ok
+# running "Top left screen corner → Mission Control"
+# defaults write com.apple.dock wvous-tl-corner -int 2
+# defaults write com.apple.dock wvous-tl-modifier -int 0;ok
+# running "Top right screen corner → Desktop"
+# defaults write com.apple.dock wvous-tr-corner -int 4
+# defaults write com.apple.dock wvous-tr-modifier -int 0;ok
+# running "Bottom right screen corner → Start screen saver"
+# defaults write com.apple.dock wvous-br-corner -int 5
+# defaults write com.apple.dock wvous-br-modifier -int 0;ok
 
 ###############################################################################
 bot "Configuring Safari & WebKit"
@@ -819,8 +825,8 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false;ok
 running "Allow hitting the Backspace key to go to the previous page in history"
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true;ok
 
-running "Hide Safari’s bookmarks bar by default"
-defaults write com.apple.Safari ShowFavoritesBar -bool false;ok
+running "Show Safari’s bookmarks bar by default"
+defaults write com.apple.Safari ShowFavoritesBar -bool true;ok
 
 running "Hide Safari’s sidebar in Top Sites"
 defaults write com.apple.Safari ShowSidebarInTopSites -bool false;ok
@@ -868,8 +874,8 @@ defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -stri
 running "Disable inline attachments (just show the icons)"
 defaults write com.apple.mail DisableInlineAttachmentViewing -bool true;ok
 
-running "Disable automatic spell checking"
-defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
+# running "Disable automatic spell checking"
+# defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
 
 ###############################################################################
 bot "Spotlight"
@@ -1026,15 +1032,15 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 running "Disable continuous spell checking"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false;ok
 
-###############################################################################
-bot "SizeUp.app"
-###############################################################################
+# ###############################################################################
+# bot "SizeUp.app"
+# ###############################################################################
 
-running "Start SizeUp at login"
-defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true;ok
+# running "Start SizeUp at login"
+# defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true;ok
 
-running "Don’t show the preferences window on next start"
-defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false;ok
+# running "Don’t show the preferences window on next start"
+# defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false;ok
 
 killall cfprefsd
 
